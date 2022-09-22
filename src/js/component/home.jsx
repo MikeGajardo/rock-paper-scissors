@@ -5,48 +5,83 @@ import rigoImage from "../../img/rigo-baby.jpg";
 
 //create your first component
 const Home = () => {
-  let userName = "Michael";
-
-  userName ? console.log(`Hello, ${userName}!`) : console.log("Hello!");
-
-  let userQuestion = "What will happen next week?";
-  console.log(`${userQuestion} ${userName}`);
-
-  let randomNumber = Math.floor(Math.random() * 8);
-
-  let eightBall = "";
-
-  switch (randomNumber) {
-    case 0:
-      eightBall = "It is certain";
-      break;
-    case 1:
-      eightBall = "It is decidedly so";
-      break;
-    case 2:
-      eightBall = "Reply hazy try again";
-      break;
-    case 3:
-      eightBall = "Cannot predict now";
-      break;
-    case 4:
-      eightBall = "Do not count on it";
-      break;
-    case 5:
-      eightBall = "My sources say no";
-      break;
-    case 6:
-      eightBall = "Outlook not so good";
-      break;
-    case 7:
-      eightBall = "Signs point to yes";
-      break;
-    default:
-      eightBall = "please ask again";
-      break;
+  const getUserChoice = (userInput) => {
+    userInput = userInput.toLowerCase();
+    if (userInput === "rock") {
+      return userInput;
+    }
+    if (userInput === "paper") {
+      return userInput;
+    }
+    if (userInput === "scissors") {
+      return userInput;
+    } 
+    if (userInput === "bomb") {
+      return userInput;
+    } 
+    else {
+      console.log("you have an error");
+    }
+  };
+  
+  const getComputerChoice = () => {
+    let randomNumber = Math.floor(Math.random() * 3);
+    if (randomNumber === 0) {
+      return "rock";
+    }
+    if (randomNumber === 1) {
+      return "paper";
+    }
+    if (randomNumber === 2) {
+      return "scissors";
+    } else {
+      console.log("you have an number error");
+    }
+  };
+  
+  const determineWinner = (userChoice, computerChoice) => {
+    if (userChoice === computerChoice) {
+      return "the game was a tie";
+    }
+    if (userChoice === "rock") {
+      if (computerChoice === "paper") {
+        return "the computer won";
+      } else {
+        return "the user won";
+      }
+    }
+    if (userChoice === "paper") {
+      if (computerChoice === "scissors") {
+        return "the computer won";
+      } else {
+        return "the user won";
+      }
+    }
+      if (userChoice === "scissors") {
+      if (computerChoice === "rock" || "paper") {
+        return "the user won";
+      } else {
+        return "the computer won";
+      }
+    }
+    if (userChoice === "bomb") {
+      if (computerChoice === "scissors" || "paper" || "rock") {
+        return "the user won";
+      } else {
+        return "the computer won";
+      }
+    }
+  };
+  
+  const playGame = () => {
+    let userChoice = getUserChoice('paper');
+    let computerChoice = getComputerChoice();
+    console.log('you threw: ' + userChoice)
+    console.log('you computer threw: ' + computerChoice);
+    console.log(determineWinner(userChoice, computerChoice))
   }
-
-  console.log(eightBall);
+  
+  console.log(playGame())
 
   return (
     <div className="text-center">
